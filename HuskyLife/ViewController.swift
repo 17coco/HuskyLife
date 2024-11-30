@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         mainScreen.tableViewContacts.separatorStyle = .none
         
         //MARK: Make the titles look large...
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         //MARK: Put the floating button above all the views...
         view.bringSubviewToFront(mainScreen.floatingButtonAddContact)
@@ -110,9 +110,11 @@ class ViewController: UIViewController {
     }
     
     @objc func addContactButtonTapped(){
-        let addContactController = AddContactViewController()
-        addContactController.currentUser = self.currentUser
-        navigationController?.pushViewController(addContactController, animated: true)
+//        let addContactController = AddContactViewController()
+//        addContactController.currentUser = self.currentUser
+//        navigationController?.pushViewController(addContactController, animated: true)
+        let task = CalendarViewController()
+        navigationController?.pushViewController(task, animated: true)
     }
 }
 
