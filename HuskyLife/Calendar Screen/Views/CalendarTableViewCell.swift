@@ -11,6 +11,7 @@ class TaskTableViewCell: UITableViewCell {
     var wrapperCellView: UIView!
     var labelTaskName: UILabel!
     var labelTime: UILabel!
+    let imageViewSymbol = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -51,6 +52,9 @@ class TaskTableViewCell: UITableViewCell {
         labelTime.textColor = .systemRed
         labelTime.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelTime)
+        imageViewSymbol.translatesAutoresizingMaskIntoConstraints = false
+        imageViewSymbol.contentMode = .scaleAspectFit
+        wrapperCellView.addSubview(imageViewSymbol)
     }
     
     func initConstraints() {
@@ -59,9 +63,13 @@ class TaskTableViewCell: UITableViewCell {
             wrapperCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            imageViewSymbol.centerYAnchor.constraint(equalTo: labelTime.centerYAnchor),
+            imageViewSymbol.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
+            imageViewSymbol.widthAnchor.constraint(equalToConstant: 16),
+            imageViewSymbol.heightAnchor.constraint(equalToConstant: 16),
             
+            labelTime.leadingAnchor.constraint(equalTo: imageViewSymbol.trailingAnchor, constant: 8),
             labelTime.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 4),
-            labelTime.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
             
             labelTaskName.topAnchor.constraint(equalTo: labelTime.bottomAnchor, constant: 2),
             labelTaskName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class CalendarViewController: UIViewController {
     let calendarView = CalendarView()
@@ -13,23 +15,23 @@ class CalendarViewController: UIViewController {
     var currentMonth: Date
     var tasks: [Task]
     var displayedTasks: [Task] = []
+    let database = Firestore.firestore()
     let calendar = Calendar.current
+    var currentUser:FirebaseAuth.User?
+    var addButton: UIButton!
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         return formatter
     }()
-    
-    init() {
-        self.selectedDate = Date()
-        self.currentMonth = Date()
-        //       wxy: Dont forget to add there
-        self.tasks = Task.createDummyTasks()
-        super.init(nibName: nil, bundle: nil)
-    }
-    
     override func loadView() {
         view = calendarView
+    }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.selectedDate = Date()
+        self.currentMonth = Date()
+        self.tasks = []
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     override func viewDidLoad() {
@@ -50,8 +52,27 @@ class CalendarViewController: UIViewController {
         updateTasksList()
         NotificationCenter.default.addObserver(self, selector: #selector(monthTapped), name: NSNotification.Name("MonthLabelTapped"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(yearTapped), name: NSNotification.Name("YearLabelTapped"), object: nil)
+        loadTasks()
+        let addButton = UIBarButtonItem(
+            image: UIImage(systemName: "plus"),
+            style: .plain,
+            target: self,
+            action: #selector(addButtonTapped)
+        )
+        self.navigationItem.rightBarButtonItem = addButton
     }
     
+    @objc func addButtonTapped() {
+        let modalContain = ModalContainerController()
+        modalContain.currentUser = currentUser
+        modalContain.modalPresentationStyle = .pageSheet
+        if let sheet = modalContain.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 20
+        }
+        present(modalContain, animated: true)
+    }
     @objc func previousMonth() {
         currentMonth = calendar.date(byAdding: .month, value: -1, to: currentMonth)!
         updateCalendar()
@@ -71,11 +92,21 @@ class CalendarViewController: UIViewController {
     }
     
     func updateTasksList() {
+        let currentTime = Date()
         let taskDate = tasks.filter {
             calendar.isDate($0.date, inSameDayAs: selectedDate)
         }
+        
         displayedTasks = taskDate.sorted {
-            $0.startTime < $1.startTime
+            let timeDifference1 = $0.startTime.timeIntervalSince(currentTime)
+            let timeDifference2 = $1.startTime.timeIntervalSince(currentTime)
+            if timeDifference1 >= 0 && timeDifference2 >= 0 {
+                return timeDifference1 < timeDifference2
+            } else if timeDifference1 < 0 && timeDifference2 < 0 {
+                return timeDifference1 > timeDifference2
+            } else {
+                return timeDifference1 >= 0
+            }
         }
         calendarView.tasksTableView.reloadData()
     }
@@ -110,14 +141,14 @@ class CalendarViewController: UIViewController {
                let year = Int(yearText) {
                 var components = self.calendar.dateComponents([.year, .month], from: self.currentMonth)
                 components.year = year
-
+                
                 if let newDate = self.calendar.date(from: components) {
                     self.currentMonth = newDate
                     self.updateCalendar()
                 }
             }
         })
-
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
@@ -137,3 +168,4 @@ class CalendarViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
