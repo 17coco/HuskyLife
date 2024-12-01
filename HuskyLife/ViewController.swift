@@ -114,6 +114,7 @@ class ViewController: UIViewController {
 //        addContactController.currentUser = self.currentUser
 //        navigationController?.pushViewController(addContactController, animated: true)
         let task = CalendarViewController()
+        task.currentUser = currentUser
         navigationController?.pushViewController(task, animated: true)
     }
 }
