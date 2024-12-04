@@ -1,27 +1,26 @@
 //
-//  ContactsTableViewCell.swift
-//  App12
+//  TrackerTableViewCell.swift
+//  HuskyLife
 //
-//  Created by Sakib Miazi on 6/2/23.
+//  Created by Zihan Xu on 2024/11/28.
 //
-
 
 import UIKit
 
-class ContactsTableViewCell: UITableViewCell {
-    
+class TrackerTableViewCell: UITableViewCell {
+
     var wrapperCellView: UIView!
     var labelName: UILabel!
-    var labelEmail: UILabel!
-    var labelPhone: UILabel!
+    var labelHours: UILabel!
+    var labelGoal: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupWrapperCellView()
         setupLabelName()
-        setupLabelEmail()
-        setupLabelPhone()
+        setupLabelHours()
+        setupLabelGoal()
         
         initConstraints()
     }
@@ -51,18 +50,18 @@ class ContactsTableViewCell: UITableViewCell {
         wrapperCellView.addSubview(labelName)
     }
     
-    func setupLabelEmail(){
-        labelEmail = UILabel()
-        labelEmail.font = UIFont.boldSystemFont(ofSize: 14)
-        labelEmail.translatesAutoresizingMaskIntoConstraints = false
-        wrapperCellView.addSubview(labelEmail)
+    func setupLabelHours(){
+        labelHours = UILabel()
+        labelHours.font = UIFont.boldSystemFont(ofSize: 14)
+        labelHours.translatesAutoresizingMaskIntoConstraints = false
+        wrapperCellView.addSubview(labelHours)
     }
     
-    func setupLabelPhone(){
-        labelPhone = UILabel()
-        labelPhone.font = UIFont.boldSystemFont(ofSize: 14)
-        labelPhone.translatesAutoresizingMaskIntoConstraints = false
-        wrapperCellView.addSubview(labelPhone)
+    func setupLabelGoal(){
+        labelGoal = UILabel()
+        labelGoal.font = UIFont.boldSystemFont(ofSize: 14)
+        labelGoal.translatesAutoresizingMaskIntoConstraints = false
+        wrapperCellView.addSubview(labelGoal)
     }
     
     func initConstraints(){
@@ -77,15 +76,15 @@ class ContactsTableViewCell: UITableViewCell {
             labelName.heightAnchor.constraint(equalToConstant: 20),
             labelName.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
             
-            labelEmail.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 2),
-            labelEmail.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
-            labelEmail.heightAnchor.constraint(equalToConstant: 16),
-            labelEmail.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
+            labelHours.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 2),
+            labelHours.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
+            labelHours.heightAnchor.constraint(equalToConstant: 16),
+            labelHours.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
             
-            labelPhone.topAnchor.constraint(equalTo: labelEmail.bottomAnchor, constant: 2),
-            labelPhone.leadingAnchor.constraint(equalTo: labelEmail.leadingAnchor),
-            labelPhone.heightAnchor.constraint(equalToConstant: 16),
-            labelPhone.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
+            labelGoal.topAnchor.constraint(equalTo: labelHours.bottomAnchor, constant: 2),
+            labelGoal.leadingAnchor.constraint(equalTo: labelHours.leadingAnchor),
+            labelGoal.heightAnchor.constraint(equalToConstant: 16),
+            labelGoal.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
             
             wrapperCellView.heightAnchor.constraint(equalToConstant: 72)
         ])

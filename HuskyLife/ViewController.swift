@@ -91,13 +91,13 @@ class ViewController: UIViewController {
         mainScreen.tableViewContacts.separatorStyle = .none
         
         //MARK: Make the titles look large...
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         //MARK: Put the floating button above all the views...
         view.bringSubviewToFront(mainScreen.floatingButtonAddContact)
         
         //MARK: tapping the floating add contact button...
-        mainScreen.floatingButtonAddContact.addTarget(self, action: #selector(addContactButtonTapped), for: .touchUpInside)
+        mainScreen.floatingButtonAddContact.addTarget(self, action: #selector(trackerButtonTapped), for: .touchUpInside)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,10 +109,13 @@ class ViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password)
     }
     
-    @objc func addContactButtonTapped(){
-        let addContactController = AddContactViewController()
-        addContactController.currentUser = self.currentUser
-        navigationController?.pushViewController(addContactController, animated: true)
+    @objc func trackerButtonTapped(){
+        let trackerController = TrackerMainViewController()
+        //let navi = UINavigationController(rootViewController: viController)
+        trackerController.currentUser = self.currentUser
+        navigationController?.pushViewController(trackerController, animated: true)
+        //present(trackerController, animated: true)
+        //navigationController?.pushViewController(trackerController, animated: true)
     }
 }
 
