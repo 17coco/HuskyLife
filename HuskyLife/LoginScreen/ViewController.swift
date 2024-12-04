@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class ViewController: UIViewController {
     
+    var currentUser:FirebaseAuth.User?
     let loginScreen = LoginScreenView()
     let childProgressView = ProgressSpinnerViewController()
     
@@ -76,7 +77,7 @@ class ViewController: UIViewController {
             // Handle successful login
             if let user = authResult?.user {
                 print("User signed in successfully: \(user.email ?? "No Email")")
-                
+                self.currentUser = user
                 // Navigate to BottomTabBarController
                 self.switchToTabBar()
             }
@@ -88,6 +89,7 @@ class ViewController: UIViewController {
         let tabBarController = BottomTabBarController()
         guard let window = UIApplication.shared.windows.first else { return }
         window.rootViewController = tabBarController
+        tabBarController.currentUser = currentUser
         window.makeKeyAndVisible()
     }
     
@@ -102,5 +104,6 @@ class ViewController: UIViewController {
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPredicate.evaluate(with: email)
     }
+
     
 }

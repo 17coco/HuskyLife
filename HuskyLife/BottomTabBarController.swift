@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class BottomTabBarController: UITabBarController {
+    
+    var currentUser:FirebaseAuth.User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
