@@ -9,12 +9,13 @@ import UIKit
 import MapKit
 class SearchViewController: UIViewController {
 
-    
     let searchBottomSheet = SearchBottomSheet()
     
     var mapItems = [MKMapItem]()
     
     let notificationCenter = NotificationCenter.default
+    
+    var delegateToMapView: MapViewController!
     
 
     override func loadView() {
@@ -46,7 +47,11 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        if let delegate = delegateToMapView {
+               delegate.loadPlacesAround(query: searchText)
+           } else {
+               print("Error: delegateToMapView is nil. Ensure it is properly assigned.")
+           }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
