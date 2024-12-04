@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let infoViewController = InfoViewController()
+//        let mapViewController = MapViewController()
         
         let navigationController = UINavigationController(rootViewController: infoViewController)
         window.rootViewController = navigationController

@@ -26,5 +26,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires location access to provide all the utilities.</string>
 </dict>
 </plist>

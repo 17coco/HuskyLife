@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 extension InfoDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -24,17 +25,16 @@ extension InfoDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        //pass messagesList[indexPath.row].chatId to chatScreen
-//        //jump tp chat screen
-//        let selected = messagesList[indexPath.row]
-//        let chatController = ChatViewController()
-//        chatController.chatId = selected.chatId
-//        chatController.currentUserEmail = currentUser?.email ?? ""
-//        chatController.selfName = currentUser?.displayName ?? ""
-//        chatController.theOtherUserName = selected.name
-//        navigationController?.pushViewController(chatController, animated: true)
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //jump tp chat screen
+        let selected = mapDataList[indexPath.row]
+        let mapViewController = MapViewController()
+        let mapView = MapView()
+        
+        mapViewController.dataTitle = selected.name
+        mapViewController.coordinate = selected.coordinate
+        mapViewController.info = selected.description
+        navigationController?.pushViewController(mapViewController, animated: true)
+    }
 }
 
