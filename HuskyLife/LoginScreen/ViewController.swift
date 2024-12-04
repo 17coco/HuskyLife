@@ -89,7 +89,6 @@ class ViewController: UIViewController {
         let tabBarController = BottomTabBarController()
         guard let window = UIApplication.shared.windows.first else { return }
         window.rootViewController = tabBarController
-        tabBarController.currentUser = currentUser
         window.makeKeyAndVisible()
     }
     
