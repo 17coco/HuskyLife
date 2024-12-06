@@ -30,11 +30,11 @@ class BottomTabBarController: UITabBarController {
                 let timerNav = UINavigationController(rootViewController: timer)
                 timerNav.tabBarItem = UITabBarItem(title: "Timer", image: UIImage(systemName: "timer"), tag: 1)
 
-                let location = FakeMapViewController()
+                let location = MapViewController()
                 let locationNav = UINavigationController(rootViewController: location)
                 locationNav.tabBarItem = UITabBarItem(title: "Location", image: UIImage(systemName: "location"), tag: 2)
 
-                let info = FakeInfoViewController()
+                let info = InfoViewController()
                 let infoNav = UINavigationController(rootViewController: info)
                 infoNav.tabBarItem = UITabBarItem(title: "Info", image: UIImage(systemName: "info.circle"), tag: 3)
 

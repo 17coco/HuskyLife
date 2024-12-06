@@ -35,6 +35,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // center the map view to current location
         onButtonCurrentLocationTapped()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePlaceSelection(_:)), name: .placeSelected, object: nil)
+        
         let mapData = Place(
             title: dataTitle,
             coordinate: coordinate,
@@ -44,7 +46,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.mapView.centerToLocation(location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
         
         mapView.mapView.delegate = self
-        
         
     }
     
@@ -71,7 +72,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         present(navForSearch, animated: true)
     }
+    
     func showSelectedPlace(placeItem: MKMapItem){
+        print("Show selected Place")
         let coordinate = placeItem.placemark.coordinate
         mapView.mapView.centerToLocation(
             location: CLLocation(
@@ -86,6 +89,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         )
         mapView.mapView.addAnnotation(place)
     }
+    
+    @objc func handlePlaceSelection(_ notification: Notification) {
+        guard let mapData = notification.object as? Place else {
+            print("Invalid place item received")
+            return
+        }
+        mapView.mapView.addAnnotation(mapData)
+        mapView.mapView.centerToLocation(location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
+    }
 }
 
 extension MKMapView{
@@ -98,3 +110,4 @@ extension MKMapView{
         setRegion(coordinateRegion, animated: true)
     }
 }
+

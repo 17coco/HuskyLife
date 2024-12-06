@@ -28,13 +28,13 @@ extension InfoDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //jump tp chat screen
         let selected = mapDataList[indexPath.row]
-        let mapViewController = MapViewController()
-        let mapView = MapView()
         
-        mapViewController.dataTitle = selected.name
-        mapViewController.coordinate = selected.coordinate
-        mapViewController.info = selected.description
-        navigationController?.pushViewController(mapViewController, animated: true)
+        let selectedPlace = Place(title: selected.name, coordinate: selected.coordinate, info: selected.description)
+//        navigationController?.pushViewController(mapViewController, animated: true)
+        NotificationCenter.default.post(name: .placeSelected, object: selectedPlace)
+
+        let mapIndex = 2
+        tabBarController?.selectedIndex = mapIndex
     }
 }
 

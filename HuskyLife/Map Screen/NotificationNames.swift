@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name{
     static let placesFromMap = Notification.Name("placesFromMap")
+    static let placeSelected = Notification.Name("placeSelected")
 }
