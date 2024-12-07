@@ -85,11 +85,18 @@ class ViewController: UIViewController {
     }
     
     func switchToTabBar() {
-        // Replace the root view controller with BottomTabBarController
         let tabBarController = BottomTabBarController()
         guard let window = UIApplication.shared.windows.first else { return }
-        window.rootViewController = tabBarController
-        window.makeKeyAndVisible()
+        UIView.transition(with: window,
+                         duration: 0.3,
+                         options: .transitionCrossDissolve,
+                         animations: {
+            let oldState = UIView.areAnimationsEnabled
+            UIView.setAnimationsEnabled(false)
+            window.rootViewController = tabBarController
+            window.makeKeyAndVisible()
+            UIView.setAnimationsEnabled(oldState)
+        })
     }
     
     func showAlert(title: String, message: String) {

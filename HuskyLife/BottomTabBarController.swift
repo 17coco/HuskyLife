@@ -21,11 +21,12 @@ class BottomTabBarController: UITabBarController {
                 print("No user is signed in.")
             } else {
                 print("got here")
-                // Create view controllers for each tab
-                let home = FakeHomeScreenViewController()
-                let homeNav = UINavigationController(rootViewController: home)
-                homeNav.tabBarItem = UITabBarItem(title: "Calendar", image: UIImage(systemName: "calendar"), tag: 0)
 
+                let calendar = CalendarViewController()
+                calendar.currentUser = user
+                let calendarNav = UINavigationController(rootViewController: calendar)
+                calendarNav.tabBarItem = UITabBarItem(title: "Calendar", image: UIImage(systemName: "calendar"), tag: 0)
+                
                 let timer = FakeTimerViewController()
                 let timerNav = UINavigationController(rootViewController: timer)
                 timerNav.tabBarItem = UITabBarItem(title: "Timer", image: UIImage(systemName: "timer"), tag: 1)
@@ -43,7 +44,7 @@ class BottomTabBarController: UITabBarController {
                 profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 4)
 
                 // Add all view controllers to the tab bar
-                self.viewControllers = [homeNav, timerNav, locationNav, infoNav, profileNav]
+                self.viewControllers = [calendarNav, timerNav, locationNav, infoNav, profileNav]
             }
         }
 
