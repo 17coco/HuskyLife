@@ -108,13 +108,13 @@ class NewSessionView: UIView {
             
             buttonWrapper1.topAnchor.constraint(equalTo: self.themeTextField.bottomAnchor, constant: 32),
             buttonWrapper1.heightAnchor.constraint(equalToConstant: 32),
-            buttonWrapper1.widthAnchor.constraint(equalToConstant: 120),
+            buttonWrapper1.widthAnchor.constraint(equalToConstant: 150),
             buttonWrapper1.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             buttonWrapper2.topAnchor.constraint(equalTo: buttonWrapper1.bottomAnchor, constant: 16),
             buttonWrapper2.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             buttonWrapper2.heightAnchor.constraint(equalToConstant: 32),
-            buttonWrapper2.widthAnchor.constraint(equalToConstant: 120),
+            buttonWrapper2.widthAnchor.constraint(equalToConstant: 150),
             
             enterTimeButton.centerXAnchor.constraint(equalTo: buttonWrapper1.centerXAnchor),
             enterTimeButton.centerYAnchor.constraint(equalTo: buttonWrapper1.centerYAnchor),

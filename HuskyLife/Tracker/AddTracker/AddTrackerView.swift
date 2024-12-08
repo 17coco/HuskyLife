@@ -26,7 +26,7 @@ class AddTrackerView: UIView {
         self.addSubview(nameTextField)
         
         timeNeededTextField = UITextField()
-        timeNeededTextField.placeholder = "Time Need (Default is 10hrs)"
+        timeNeededTextField.placeholder = "Time Needed"
         timeNeededTextField.borderStyle = .roundedRect
         timeNeededTextField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeNeededTextField)

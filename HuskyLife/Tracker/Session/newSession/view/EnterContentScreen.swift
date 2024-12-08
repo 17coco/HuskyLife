@@ -19,6 +19,7 @@ class EnterContentScreen: UIView {
     var hintLabel1:UILabel!
     var hintLabel2:UILabel!
     var contentTextView:UITextView!
+    var buttonWrapper:UIView!
     var contentFinishButton:UIButton!
     
     override init(frame: CGRect) {
@@ -26,7 +27,7 @@ class EnterContentScreen: UIView {
         self.backgroundColor = .white
         
         hintLabel2 = UILabel()
-        hintLabel2.text = "Record what you did for this session here:"
+        hintLabel2.text = "Record what you did:"
         hintLabel2.font = .boldSystemFont(ofSize: 24)
         hintLabel2.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(hintLabel2)
@@ -44,10 +45,18 @@ class EnterContentScreen: UIView {
         contentTextView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(contentTextView)
         
+        buttonWrapper = UIView()
+        buttonWrapper.backgroundColor = .black
+        buttonWrapper.layer.cornerRadius = 4
+        buttonWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(buttonWrapper)
+        
         contentFinishButton = UIButton(type:.system)
         contentFinishButton.setTitle("Finsih", for: .normal)
+        contentFinishButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        contentFinishButton.setTitleColor(.white, for: .normal)
         contentFinishButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(contentFinishButton)
+        buttonWrapper.addSubview(contentFinishButton)
         
         NSLayoutConstraint.activate([
             
@@ -58,15 +67,19 @@ class EnterContentScreen: UIView {
             hintLabel2.topAnchor.constraint(equalTo: self.hintLabel1.bottomAnchor, constant: 8),
             hintLabel2.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
-            contentTextView.topAnchor.constraint(equalTo: self.hintLabel2.bottomAnchor, constant: 8),
+            contentTextView.topAnchor.constraint(equalTo: self.hintLabel2.bottomAnchor, constant: 32),
             contentTextView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             contentTextView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             contentTextView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             contentTextView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
 
+            buttonWrapper.topAnchor.constraint(equalTo: self.contentTextView.bottomAnchor, constant: 32),
+            buttonWrapper.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            buttonWrapper.heightAnchor.constraint(equalToConstant: 32),
+            buttonWrapper.widthAnchor.constraint(equalToConstant: 150),
             
-            contentFinishButton.topAnchor.constraint(equalTo: self.contentTextView.bottomAnchor, constant: 8),
-            contentFinishButton.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            contentFinishButton.centerYAnchor.constraint(equalTo: buttonWrapper.centerYAnchor),
+            contentFinishButton.centerXAnchor.constraint(equalTo: buttonWrapper.centerXAnchor),
 
         ])
     }

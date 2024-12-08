@@ -14,15 +14,18 @@ class EnterTimeScreen: UIView {
     var datePickerStart:UIDatePicker!
     var datePickerEnd:UIDatePicker!
     var timeProceedButton:UIButton!
+    var buttonWrapper:UIView!
     
     func setupLabels(){
         hintLabel1 = UILabel()
         hintLabel1.text = "Enter Start Time"
+        hintLabel1.font = .boldSystemFont(ofSize: 18)
         hintLabel1.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(hintLabel1)
         
         hintLabel2 = UILabel()
         hintLabel2.text = "Enter End Time"
+        hintLabel2.font = .boldSystemFont(ofSize: 18)
         hintLabel2.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(hintLabel2)
         
@@ -43,10 +46,18 @@ class EnterTimeScreen: UIView {
     }
     
     func setupButtons() {
+        buttonWrapper = UIView()
+        buttonWrapper.backgroundColor = .black
+        buttonWrapper.layer.cornerRadius = 4
+        buttonWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(buttonWrapper)
+        
         timeProceedButton = UIButton(type:.system)
-        timeProceedButton.setTitle("PROCEED", for: .normal)
+        timeProceedButton.setTitle("Proceed", for: .normal)
+        timeProceedButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        timeProceedButton.setTitleColor(.white, for: .normal)
         timeProceedButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(timeProceedButton)
+        buttonWrapper.addSubview(timeProceedButton)
         
 
     }
@@ -75,9 +86,13 @@ class EnterTimeScreen: UIView {
             datePickerEnd.topAnchor.constraint(equalTo: self.hintLabel2.bottomAnchor, constant: 8),
             datePickerEnd.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
+            buttonWrapper.topAnchor.constraint(equalTo: self.datePickerEnd.bottomAnchor, constant: 32),
+            buttonWrapper.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            buttonWrapper.heightAnchor.constraint(equalToConstant: 32),
+            buttonWrapper.widthAnchor.constraint(equalToConstant: 150),
             
-            timeProceedButton.topAnchor.constraint(equalTo: self.datePickerEnd.bottomAnchor, constant: 32),
-            timeProceedButton.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            timeProceedButton.centerYAnchor.constraint(equalTo: buttonWrapper.centerYAnchor),
+            timeProceedButton.centerXAnchor.constraint(equalTo: buttonWrapper.centerXAnchor),
 
         ])
     }
