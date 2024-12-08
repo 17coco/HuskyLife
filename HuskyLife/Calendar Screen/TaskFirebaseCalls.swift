@@ -16,11 +16,9 @@ extension CalendarViewController {
             .collection("tasks")
             .addSnapshotListener(includeMetadataChanges: false, listener: { querySnapshot, error in
                 if let documents = querySnapshot?.documents {
-                    print("Number of documents: \(documents.count)")
                     self.tasks.removeAll()
                     for document in documents {
                         let data = document.data()
-                        print("Document data: \(data)")
                         if let name = data["name"] as? String,
                            let dateTimestamp = data["date"] as? Timestamp,
                            let startTimestamp = data["startTime"] as? Timestamp,

@@ -78,10 +78,15 @@ class EditProfileScreenView: UIView {
     
     func setupSaveButton() {
         buttonSave = UIButton(type: .system)
-        buttonSave.setTitle("Save changes", for: .normal)
+        buttonSave.setTitle("Save Changes", for: .normal)
         buttonSave.backgroundColor = .black
         buttonSave.setTitleColor(.white, for: .normal)
         buttonSave.layer.cornerRadius = 8
+        buttonSave.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        buttonSave.layer.shadowColor = UIColor.black.cgColor
+        buttonSave.layer.shadowOffset = CGSize(width: 0, height: 2)
+        buttonSave.layer.shadowRadius = 4
+        buttonSave.layer.shadowOpacity = 0.1
         buttonSave.translatesAutoresizingMaskIntoConstraints = false
         contentWrapper.addSubview(buttonSave)
     }
@@ -187,7 +192,7 @@ class EditProfileScreenView: UIView {
             buttonSave.centerXAnchor.constraint(equalTo: contentWrapper.centerXAnchor),
             buttonSave.topAnchor.constraint(equalTo: dropdownButtonCountry.bottomAnchor, constant: 30),
             buttonSave.heightAnchor.constraint(equalToConstant: 50),
-            buttonSave.widthAnchor.constraint(equalToConstant: 200),
+            buttonSave.widthAnchor.constraint(equalTo: contentWrapper.widthAnchor, multiplier: 0.8),
             buttonSave.bottomAnchor.constraint(lessThanOrEqualTo: contentWrapper.bottomAnchor, constant: -20)
         ])
     }

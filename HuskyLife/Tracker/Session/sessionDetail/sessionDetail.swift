@@ -1,18 +1,15 @@
 //
-//  ProfileScreenView.swift
+//  sessionDetail.swift
 //  HuskyLife
 //
-//  Created by Beihan  Zhou  on 12/1/24.
+//  Created by Zihan Xu on 2024/12/3.
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseAuth
 
-class ProfileScreenView: UIView {
-    
-    var contentWrapper: UIScrollView!
-    var imageProfile: UIImageView!
+class sessionDetail: UIView {
+
+    var contentWrapper:UIScrollView!
     var labelName: UILabel!
     var labelEmail: UILabel!
     var labelSchool: UILabel!
@@ -26,8 +23,8 @@ class ProfileScreenView: UIView {
     
     func setupUI() {
         backgroundColor = .white
+        
         setupContentWrapper()
-        setupProfileImageView()
         setupLabels()
         initConstraints()
     }
@@ -35,27 +32,16 @@ class ProfileScreenView: UIView {
     func setupContentWrapper() {
         contentWrapper = UIScrollView()
         contentWrapper.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(contentWrapper)
+        self.addSubview(contentWrapper)
     }
     
-    func setupProfileImageView() {
-        imageProfile = UIImageView()
-        imageProfile.image = UIImage(systemName: "person.circle")
-        imageProfile.contentMode = .scaleAspectFit
-        imageProfile.layer.cornerRadius = 75
-        imageProfile.layer.borderColor = UIColor.black.cgColor
-        imageProfile.layer.borderWidth = 1
-        imageProfile.clipsToBounds = true
-        imageProfile.translatesAutoresizingMaskIntoConstraints = false
-        contentWrapper.addSubview(imageProfile)
-    }
     
     func setupLabels() {
-        labelName = createLabel(withText: "Name:", isBold: true)
-        labelEmail = createLabel(withText: "Email:", isBold: true)
-        labelSchool = createLabel(withText: "School: Northeastern University", isBold: true)
-        labelDob = createLabel(withText: "Date of Birth:", isBold: true)
-        labelCountry = createLabel(withText: "Country/Region:", isBold: true)
+        labelName = createLabel(withText: "Theme: ", isBold: true)
+        labelEmail = createLabel(withText: "Start: ", isBold: true)
+        labelSchool = createLabel(withText: "End: ", isBold: true)
+        labelDob = createLabel(withText: "Time Elapsed: ", isBold: true)
+        labelCountry = createLabel(withText: "Content: ", isBold: true)
     }
     
     func createLabel(withText text: String, isBold: Bool = false) -> UILabel {
@@ -70,28 +56,29 @@ class ProfileScreenView: UIView {
     
     func initConstraints() {
         NSLayoutConstraint.activate([
-            contentWrapper.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            contentWrapper.leadingAnchor.constraint(equalTo: leadingAnchor),
-            contentWrapper.trailingAnchor.constraint(equalTo: trailingAnchor),
-            contentWrapper.bottomAnchor.constraint(equalTo: bottomAnchor),
+            // Content Wrapper
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            imageProfile.centerXAnchor.constraint(equalTo: contentWrapper.centerXAnchor),
-            imageProfile.topAnchor.constraint(equalTo: contentWrapper.topAnchor, constant: 60),
-            imageProfile.widthAnchor.constraint(equalToConstant: 150),
-            imageProfile.heightAnchor.constraint(equalToConstant: 150),
-            
+            // Name Label
             labelName.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 32),
-            labelName.topAnchor.constraint(equalTo: imageProfile.bottomAnchor, constant: 50),
+            labelName.topAnchor.constraint(equalTo: contentWrapper.topAnchor, constant: 60),
             
+            // Email Label
             labelEmail.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 32),
             labelEmail.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 20),
             
+            // School Label
             labelSchool.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 32),
             labelSchool.topAnchor.constraint(equalTo: labelEmail.bottomAnchor, constant: 20),
             
+            // DOB Label
             labelDob.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 32),
             labelDob.topAnchor.constraint(equalTo: labelSchool.bottomAnchor, constant: 20),
             
+            // Country Label
             labelCountry.leadingAnchor.constraint(equalTo: contentWrapper.leadingAnchor, constant: 32),
             labelCountry.topAnchor.constraint(equalTo: labelDob.bottomAnchor, constant: 20),
             labelCountry.bottomAnchor.constraint(equalTo: contentWrapper.bottomAnchor, constant: -20)

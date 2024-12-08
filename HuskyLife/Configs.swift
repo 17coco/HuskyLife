@@ -7,5 +7,9 @@
 
 import Foundation
 class Configs{
-    static let tableViewContactsID = "tableViewContactsID"
+    static let infoDetailsTableViewID = "infoDetailsTableViewID"
+    static let placeIdentifier = "placeIdentifier"
+    static let searchTableViewID = "searchTableViewID"
+    static let trackerTableViewID = "trackerTableViewID"
+    static let sessionTableViewID = "sessionTableViewID"
 }
