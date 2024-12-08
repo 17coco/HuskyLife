@@ -16,7 +16,7 @@ extension TrackerMainViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Configs.trackerTableViewID, for: indexPath) as! TrackerTableViewCell
         cell.labelName.text = trackers[indexPath.row].name
-        cell.labelHours.text = "Time Elapsed: \((trackers[indexPath.row].timeSpent/60/60).formatted(.number.precision(.fractionLength(1)))) Hours"
+        cell.labelHours.text = "Time Elapsed: \((Double(trackers[indexPath.row].timeSpent)/60/60).formatted(.number.precision(.fractionLength(1)))) / \((Double(trackers[indexPath.row].timeNeeded)/60/60).formatted(.number.precision(.fractionLength(1)))) Hours"
         cell.labelGoal.text = "Goal: \(trackers[indexPath.row].currentGoal)"
         //cell.progressView.setProgress(0.75)
         let progress = Float(trackers[indexPath.row].timeSpent)/Float(trackers[indexPath.row].timeNeeded)

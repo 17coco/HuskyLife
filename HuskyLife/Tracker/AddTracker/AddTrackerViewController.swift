@@ -23,6 +23,10 @@ class AddTrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addTrackerSheet.addButton.addTarget(self, action: #selector(onAddButtonTapped), for: .touchUpInside)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
     }
 
     //MARK: on add button tapped....
@@ -32,10 +36,10 @@ class AddTrackerViewController: UIViewController {
         let timeNeeded = addTrackerSheet.timeNeededTextField.text
         
         if name == "" || initGoal == "" || timeNeeded == ""{
-            //alert..
+            showAlert(title: "Warning", message: "Please Fill All Fields")
         }else{
             if let nameUw = name, let time = Int(timeNeeded!), let goal = initGoal {
-                let tracker = Tracker(name: nameUw, timeNeeded: time, timeSpent: 0, lastSession: "NONE", currentGoal: goal)
+                let tracker = Tracker(name: nameUw, timeNeeded: time*60*60, timeSpent: 0, lastSession: "NONE", currentGoal: goal)
                 
                 saveTrackerToFireStore(tracker: tracker)
             }
@@ -66,6 +70,16 @@ class AddTrackerViewController: UIViewController {
             }
         }
     
+    }
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func hideKeyboardOnTap(){
+        //MARK: removing the keyboard from screen...
+        view.endEditing(true)
     }
 }
 

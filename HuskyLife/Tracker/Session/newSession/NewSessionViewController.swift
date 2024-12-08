@@ -58,6 +58,15 @@ class NewSessionViewController: UIViewController {
         onGoingSession.pauseButton.addTarget(self, action: #selector(toggleTimer), for: .touchUpInside)
         //third page
         enterContent.contentFinishButton.addTarget(self, action: #selector(onButtonFinishTapped), for: .touchUpInside)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc func hideKeyboardOnTap(){
+        //MARK: removing the keyboard from screen...
+        view.endEditing(true)
     }
     
     @objc func onButtonLiveTrackTapped(){
@@ -71,6 +80,9 @@ class NewSessionViewController: UIViewController {
                 startTimer()
                         
             }
+            else {
+                showAlert(title:  "Warning", message: "Please enter the theme of the session.")
+            }
         }
     }
     
@@ -79,7 +91,9 @@ class NewSessionViewController: UIViewController {
             if !themeNew.isEmpty {
                 theme = themeNew
                 view = enterTime
-            }
+            } else {
+                showAlert(title:  "Warning", message: "Please enter the theme of the session.")
+        }
         }
     }
     
@@ -178,6 +192,11 @@ class NewSessionViewController: UIViewController {
             }
         }
     
+    }
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 

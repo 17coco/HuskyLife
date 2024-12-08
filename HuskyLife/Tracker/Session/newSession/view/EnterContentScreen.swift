@@ -52,7 +52,7 @@ class EnterContentScreen: UIView {
         self.addSubview(buttonWrapper)
         
         contentFinishButton = UIButton(type:.system)
-        contentFinishButton.setTitle("Finsih", for: .normal)
+        contentFinishButton.setTitle("Finish", for: .normal)
         contentFinishButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         contentFinishButton.setTitleColor(.white, for: .normal)
         contentFinishButton.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +69,8 @@ class EnterContentScreen: UIView {
             
             contentTextView.topAnchor.constraint(equalTo: self.hintLabel2.bottomAnchor, constant: 32),
             contentTextView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            contentTextView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            contentTextView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            contentTextView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            contentTextView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -32),
             contentTextView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
 
             buttonWrapper.topAnchor.constraint(equalTo: self.contentTextView.bottomAnchor, constant: 32),

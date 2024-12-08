@@ -50,7 +50,7 @@ class Progress: UIView {
         addSubview(progressLabel)
         
         progressIndicator.textAlignment = .left
-        progressIndicator.font = .systemFont(ofSize: 14, weight: .medium)
+        progressIndicator.font = .systemFont(ofSize: 13.5, weight: .medium)
         progressIndicator.textColor = .blue
         addSubview(progressIndicator)
         

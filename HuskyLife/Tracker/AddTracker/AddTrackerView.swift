@@ -8,16 +8,24 @@
 import UIKit
 
 class AddTrackerView: UIView {
+    var addLabel:UILabel!
     var nameTextField:UITextField!
     var timeNeededTextField:UITextField!
     var initGoalTextField:UITextField!
     var addButton:UIButton!
+    var buttonWrapper:UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         
         self.backgroundColor = .white
+        
+        addLabel = UILabel()
+        addLabel.text = "Add Tracker"
+        addLabel.translatesAutoresizingMaskIntoConstraints = false
+        addLabel.font = .systemFont(ofSize: 20)
+        self.addSubview(addLabel)
         
         nameTextField = UITextField()
         nameTextField.placeholder = "Task Name"
@@ -26,26 +34,37 @@ class AddTrackerView: UIView {
         self.addSubview(nameTextField)
         
         timeNeededTextField = UITextField()
-        timeNeededTextField.placeholder = "Time Needed"
+        timeNeededTextField.placeholder = "Time Needed (Hours)"
         timeNeededTextField.borderStyle = .roundedRect
         timeNeededTextField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeNeededTextField)
         
         
         initGoalTextField = UITextField()
-        initGoalTextField.placeholder = "Enter your first goal here."
+        initGoalTextField.placeholder = "Enter your goal here"
         initGoalTextField.borderStyle = .roundedRect
         initGoalTextField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(initGoalTextField)
         
+        buttonWrapper = UIView()
+        buttonWrapper.backgroundColor = .black
+        buttonWrapper.layer.cornerRadius = 4
+        buttonWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(buttonWrapper)
+        
         addButton = UIButton(type: .system)
-        addButton.setTitle("Add Tracker", for: .normal)
+        addButton.setTitle("Finish", for: .normal)
+        addButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        addButton.setTitleColor(.white, for: .normal)
         addButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(addButton)
+        buttonWrapper.addSubview(addButton)
         
         //MARK: constraints...
         NSLayoutConstraint.activate([
-            nameTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            addLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            addLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            
+            nameTextField.topAnchor.constraint(equalTo: addLabel.bottomAnchor, constant: 20),
             nameTextField.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             nameTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             
@@ -57,8 +76,13 @@ class AddTrackerView: UIView {
             initGoalTextField.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             initGoalTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             
-            addButton.topAnchor.constraint(equalTo: initGoalTextField.bottomAnchor, constant: 20),
-            addButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            buttonWrapper.topAnchor.constraint(equalTo: self.initGoalTextField.bottomAnchor, constant: 32),
+            buttonWrapper.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            buttonWrapper.heightAnchor.constraint(equalToConstant: 32),
+            buttonWrapper.widthAnchor.constraint(equalToConstant: 150),
+            
+            addButton.centerXAnchor.constraint(equalTo: buttonWrapper.centerXAnchor),
+            addButton.centerYAnchor.constraint(equalTo: buttonWrapper.centerYAnchor),
         ])
     }
     
