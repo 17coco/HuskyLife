@@ -21,10 +21,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.isHidden = true
-        setupActions()
-        
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        if let user = Auth.auth().currentUser {
+                self.currentUser = user
+                let tabBarController = BottomTabBarController()
+                guard let window = UIApplication.shared.windows.first else { return }
+                UIView.transition(with: window,
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    let oldState = UIView.areAnimationsEnabled
+                    UIView.setAnimationsEnabled(false)
+                    window.rootViewController = tabBarController
+                    window.makeKeyAndVisible()
+                    UIView.setAnimationsEnabled(oldState)
+                })
+                return
+            }
+            
+            self.tabBarController?.tabBar.isHidden = true
+            setupActions()
+            
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
             tapRecognizer.cancelsTouchesInView = false
             view.addGestureRecognizer(tapRecognizer)
     }
@@ -84,8 +101,16 @@ class ViewController: UIViewController {
                 // jump to BottomTabBarController
                 let tabBarController = BottomTabBarController()
                 guard let window = UIApplication.shared.windows.first else { return }
-                window.rootViewController = tabBarController
-                window.makeKeyAndVisible()
+                UIView.transition(with: window,
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    let oldState = UIView.areAnimationsEnabled
+                    UIView.setAnimationsEnabled(false)
+                    window.rootViewController = tabBarController
+                    window.makeKeyAndVisible()
+                    UIView.setAnimationsEnabled(oldState)
+                })
             }
         }
     }

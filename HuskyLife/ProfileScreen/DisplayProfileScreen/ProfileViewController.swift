@@ -28,7 +28,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         childProgressView.isOpaque = true
         view = profileScreen
-        title = "My Profile"
         setupRightBarButton()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit",style: .plain,target: self,action:#selector(editProfile))
         
