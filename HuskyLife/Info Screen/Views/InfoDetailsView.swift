@@ -15,7 +15,9 @@ class InfoDetailsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        
+        // Set a subtle dark red background
+        self.backgroundColor = UIColor(red: 0.2, green: 0.0, blue: 0.0, alpha: 1.0) // Subtle dark red
         
         setupTableViewInfoDetails()
         initConstraints()
@@ -26,20 +28,31 @@ class InfoDetailsView: UIView {
         tableViewInfoDetails = UITableView()
         tableViewInfoDetails.translatesAutoresizingMaskIntoConstraints = false
         tableViewInfoDetails.register(InfoDetailsTableViewCell.self, forCellReuseIdentifier: Configs.infoDetailsTableViewID)
-        tableViewInfoDetails.backgroundColor = .white
+        
+        // Set the table view's background to a light gray
+        tableViewInfoDetails.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0) // Light gray
+        tableViewInfoDetails.separatorColor = UIColor.darkGray // Darker separator for contrast
         tableViewInfoDetails.separatorStyle = .singleLine
+        tableViewInfoDetails.layer.cornerRadius = 12
+        tableViewInfoDetails.clipsToBounds = true
+        
+        // Dynamic height adjustments
         tableViewInfoDetails.rowHeight = UITableView.automaticDimension
-        tableViewInfoDetails.estimatedRowHeight = 100
+        tableViewInfoDetails.estimatedRowHeight = 120
+        
+        // Avoid unnecessary footers
+        tableViewInfoDetails.tableFooterView = UIView(frame: .zero)
+        
         self.addSubview(tableViewInfoDetails)
     }
     
     // Setup constraints
     private func initConstraints() {
         NSLayoutConstraint.activate([
-            tableViewInfoDetails.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            tableViewInfoDetails.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            tableViewInfoDetails.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            tableViewInfoDetails.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            tableViewInfoDetails.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+            tableViewInfoDetails.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            tableViewInfoDetails.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            tableViewInfoDetails.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
     

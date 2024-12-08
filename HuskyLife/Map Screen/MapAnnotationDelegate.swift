@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-extension ViewController: MKMapViewDelegate{
+extension MapViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)
         -> MKAnnotationView? {
         guard let annotation = annotation as? Place else { return nil }
@@ -34,7 +34,7 @@ extension ViewController: MKMapViewDelegate{
         
         let ac = UIAlertController(
             title: annotation.title,
-            message: "Navigate to \(annotation.title!) now?",
+            message: "\(annotation.info)\n\nNavigate to \(annotation.title!) now?",
             preferredStyle: .alert
         )
         ac.addAction(UIAlertAction(title: "Navigate", style: .default, handler: {_ in
@@ -46,4 +46,5 @@ extension ViewController: MKMapViewDelegate{
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
     }
+    
 }

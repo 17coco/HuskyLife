@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController {
     
     let mapView = MapView()
     let locationManager = CLLocationManager()
@@ -96,7 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             return
         }
         mapView.mapView.addAnnotation(mapData)
-        mapView.mapView.centerToLocation(location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
+        mapView.mapView.centerToLocation(location: CLLocation(latitude: mapData.coordinate.latitude, longitude: mapData.coordinate.longitude))
     }
 }
 

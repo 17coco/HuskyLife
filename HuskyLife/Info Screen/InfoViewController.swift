@@ -21,6 +21,8 @@ class InfoViewController: UIViewController {
         infoView.buttonAcademy.addTarget(self, action: #selector(onButtonAcademyTapped), for: .touchUpInside)
         infoView.buttonFitness.addTarget(self, action: #selector(onButtonFitnessTapped), for: .touchUpInside)
         infoView.buttonFood.addTarget(self, action: #selector(onButtonFoodTapped), for: .touchUpInside)
+        infoView.buttonResidential.addTarget(self, action: #selector(onButtonResidentialTapped), for: .touchUpInside)
+        infoView.buttonParking.addTarget(self, action: #selector(onButtonParkingTapped), for: .touchUpInside)
     }
     
     @objc func onButtonAcademyTapped() {
@@ -36,6 +38,16 @@ class InfoViewController: UIViewController {
     @objc func onButtonFoodTapped() {
         let infoDetailViewController = InfoDetailsViewController()
         infoDetailViewController.category = "food"
+        navigationController?.pushViewController(infoDetailViewController, animated: true)
+    }
+    @objc func onButtonResidentialTapped() {
+        let infoDetailViewController = InfoDetailsViewController()
+        infoDetailViewController.category = "residential"
+        navigationController?.pushViewController(infoDetailViewController, animated: true)
+    }
+    @objc func onButtonParkingTapped() {
+        let infoDetailViewController = InfoDetailsViewController()
+        infoDetailViewController.category = "parking"
         navigationController?.pushViewController(infoDetailViewController, animated: true)
     }
     
