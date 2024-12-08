@@ -32,7 +32,6 @@ class ProfileViewController: UIViewController {
         setupRightBarButton()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit",style: .plain,target: self,action:#selector(editProfile))
         
-        navigationItem.leftBarButtonItem?.tintColor = .black
     }
     
     @objc func editProfile() {
@@ -117,7 +116,6 @@ class ProfileViewController: UIViewController {
                     self.loadProfileImage(from: imageUrl)
                 } else {
                     self.profileScreen.imageProfile.image = UIImage(systemName: "person.circle")
-                    self.profileScreen.imageProfile.tintColor = .gray
                     self.hideActivityIndicator() // Hide after profile is updated
                 }
             } else {
@@ -172,9 +170,6 @@ extension ProfileViewController{
             target: self,
             action: #selector(onLogOutBarButtonTapped)
         )
-        barIcon.tintColor = .black
-        barText.tintColor = .black
-        
         navigationItem.rightBarButtonItems = [barIcon]
         
     }
@@ -185,7 +180,7 @@ extension ProfileViewController{
         logoutAlert.addAction(UIAlertAction(title: "Yes, log out!", style: .default, handler: {(_) in
                 do{
                     try Auth.auth().signOut()
-                    let loginScreen = ViewController()
+                    let loginScreen = UINavigationController(rootViewController: ViewController())
                     guard let window = UIApplication.shared.windows.first else { return }
                     window.rootViewController = loginScreen
                     window.makeKeyAndVisible()

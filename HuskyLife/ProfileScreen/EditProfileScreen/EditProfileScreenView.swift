@@ -46,7 +46,6 @@ class EditProfileScreenView: UIView {
     func setupProfileImageView() {
         imageProfile = UIImageView()
         imageProfile.image = UIImage(systemName: "person.circle.fill")
-        imageProfile.tintColor = .gray
         imageProfile.contentMode = .scaleAspectFit
         imageProfile.layer.cornerRadius = 60
         imageProfile.layer.borderColor = UIColor.black.cgColor
