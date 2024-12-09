@@ -8,14 +8,14 @@
 import UIKit
 
 class TrackerView: UIView {
-
+    
     var trackersTableView:UITableView!
     
     func setuptrackersTableView(){
         trackersTableView = UITableView()
         trackersTableView.backgroundColor = .white
         trackersTableView.register(TrackerTableViewCell.self, forCellReuseIdentifier: Configs.trackerTableViewID)
-
+        
         trackersTableView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(trackersTableView)
     }
@@ -25,10 +25,10 @@ class TrackerView: UIView {
         setuptrackersTableView()
         
         NSLayoutConstraint.activate([
-            trackersTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
-            trackersTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -8),
-            trackersTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            trackersTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            trackersTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            trackersTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            trackersTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            trackersTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
     

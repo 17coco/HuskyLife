@@ -1,20 +1,12 @@
-//
-//  TrackerSessionTableViewCell.swift
-//  HuskyLife
-//
-//  Created by Zihan Xu on 2024/11/28.
-//
-
 import UIKit
 
 class TrackerSessionTableViewCell: UITableViewCell {
-
     var wrapperCellView: UIView!
     var labelName: UILabel!
     var labelHours: UILabel!
     var labelGoal: UILabel!
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupWrapperCellView()
@@ -29,76 +21,77 @@ class TrackerSessionTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupWrapperCellView(){
+    func setupWrapperCellView() {
         wrapperCellView = UITableViewCell()
-        
-        //working with the shadows and colors...
-        wrapperCellView.backgroundColor = .white
-        wrapperCellView.layer.cornerRadius = 6.0
-        wrapperCellView.layer.shadowColor = UIColor.gray.cgColor
-        wrapperCellView.layer.shadowOffset = .zero
-        wrapperCellView.layer.shadowRadius = 4.0
-        wrapperCellView.layer.shadowOpacity = 0.4
+        wrapperCellView.backgroundColor = .systemBackground
+        wrapperCellView.layer.cornerRadius = 12.0
+        wrapperCellView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+        wrapperCellView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        wrapperCellView.layer.shadowRadius = 8.0
+        wrapperCellView.layer.shadowOpacity = 1.0
+        wrapperCellView.layer.masksToBounds = false
         wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(wrapperCellView)
+        wrapperCellView.layer.borderWidth = 1.0
+        wrapperCellView.layer.borderColor = UIColor.systemGray6.cgColor
     }
     
-    func setupLabelName(){
+    func setupLabelName() {
         labelName = UILabel()
-        labelName.font = UIFont.boldSystemFont(ofSize: 20)
+        labelName.font = .systemFont(ofSize: 20, weight: .semibold)
+        labelName.textColor = .label
         labelName.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelName)
     }
     
-    func setupLabelHours(){
+    func setupLabelHours() {
         labelHours = UILabel()
-        labelHours.font = UIFont.boldSystemFont(ofSize: 14)
+        labelHours.font = .systemFont(ofSize: 15, weight: .medium)
+        labelHours.textColor = .systemBlue
         labelHours.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelHours)
     }
     
-    func setupLabelGoal(){
+    func setupLabelGoal() {
         labelGoal = UILabel()
-        labelGoal.font = UIFont.boldSystemFont(ofSize: 14)
+        labelGoal.font = .systemFont(ofSize: 14, weight: .regular)
+        labelGoal.textColor = .secondaryLabel
         labelGoal.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelGoal)
     }
     
-    func initConstraints(){
+    func initConstraints() {
         NSLayoutConstraint.activate([
-            wrapperCellView.topAnchor.constraint(equalTo: self.topAnchor,constant: 10),
-            wrapperCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-            wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            
-            labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 8),
+            // Wrapper view constraints with increased padding
+            wrapperCellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            wrapperCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+
+            labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 12),
             labelName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
-            labelName.heightAnchor.constraint(equalToConstant: 20),
-            labelName.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
-            
-            labelHours.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 5),
+            labelName.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
+            labelName.heightAnchor.constraint(equalToConstant: 24),
+            labelHours.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 4),
             labelHours.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
-            labelHours.heightAnchor.constraint(equalToConstant: 16),
-            labelHours.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
-            
-            labelGoal.topAnchor.constraint(equalTo: labelHours.bottomAnchor, constant: 5),
-            labelGoal.leadingAnchor.constraint(equalTo: labelHours.leadingAnchor),
-            labelGoal.heightAnchor.constraint(equalToConstant: 16),
-            labelGoal.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
-            
-            wrapperCellView.heightAnchor.constraint(equalToConstant: 78)
+            labelHours.trailingAnchor.constraint(equalTo: labelName.trailingAnchor),
+            labelHours.heightAnchor.constraint(equalToConstant: 18),
+
+            labelGoal.topAnchor.constraint(equalTo: labelHours.bottomAnchor, constant: 4),
+            labelGoal.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
+            labelGoal.trailingAnchor.constraint(equalTo: labelName.trailingAnchor),
+            labelGoal.heightAnchor.constraint(equalToConstant: 18),
+            labelGoal.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -12),
+
+            wrapperCellView.heightAnchor.constraint(greaterThanOrEqualToConstant: 90)
         ])
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
 }
